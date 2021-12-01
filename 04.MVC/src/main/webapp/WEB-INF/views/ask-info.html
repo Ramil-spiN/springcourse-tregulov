@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Enter your information:</h2>
+<br>
+<br>
+<!--<form action="showInfo" method="get">
+    <input type="text" name="employeeName" placeholder="Name">
+    <input type="submit">
+</form>-->
+<form th:action="@{showInfo}" th:object="${employee}">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" th:field="*{name}" id="name" placeholder="Name">
+                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </td>
+
+        </tr>
+        <tr>
+            <td>Surname</td>
+            <td><input type="text" th:field="*{surname}" id="surname" placeholder="Surname"></td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td><input type="text" th:field="*{salary}" id="salary"></td>
+        </tr>
+        <tr>
+            <td>Phone Number</td>
+            <td>
+                <input type="text" th:field="*{phone}" id="phone" placeholder="Phone Number"
+                       data-inputmask="'mask': '999-99-99'" autocomplete="off">
+<!--                Маска не работает-->
+                <div style="color:red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td>
+                <select th:field="*{department_id}">
+                    <option th:each="entry : ${employee.getDepartmentsMap().entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
+<!--                    <option th:value="0" th:text="IT"></option>-->
+<!--                    <option th:value="1" th:text="Architecture"></option>-->
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Post</td>
+            <td>
+                <div th:each="entry : ${employee.getPostsMap().entrySet()}">
+                    <input type="radio" th:field="*{post_id}" th:value="${entry.key}" th:text="${entry.value}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Languages</td>
+            <td>
+                <div th:each="entry : ${employee.getLanguagesMap().entrySet()}">
+                    <input type="checkbox" th:field="*{languages}" th:value="${entry.key}" th:text="${entry.value}">
+                </div>
+                <div style="color:red" th:if="${#fields.hasErrors('languages')}" th:errors="*{languages}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit"></td>
+        </tr>
+    </table>
+</form>
+<script th:src="@{assets/inputmask/jquery.inputmask.min.js}"></script>
+<script>
+    $(":input").inputmask();
+</script>
+</body>
+</html>

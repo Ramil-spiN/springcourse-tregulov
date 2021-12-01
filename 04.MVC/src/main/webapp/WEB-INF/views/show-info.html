@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Your information:</h2>
+<br>
+<h3>
+<table>
+    <tr>
+        <td>Name : </td>
+        <td><div th:text="${employee.getName()}"></div></td>
+    </tr>
+    <tr>
+        <td>Surname : </td>
+        <td><div th:text="${employee.getSurname()}"></div></td>
+    </tr>
+    <tr>
+        <td>Salary : </td>
+        <td><div th:text="${employee.getSalary()}"></div></td>
+    </tr>
+    <tr>
+        <td>Phone Number : </td>
+        <td><div th:text="${employee.getPhone()}"></div></td>
+    </tr>
+    <tr>
+        <td>Department : </td>
+        <td><div th:text="${employee.getDepartment_id()}"></div></td>
+    </tr>
+    <tr>
+        <td>Post : </td>
+        <td><div th:text="${employee.getPost_id()}"></div></td>
+    </tr>
+    <tr>
+        <td>Languages : </td>
+        <td>
+            <ul>
+                <div th:each="lang : ${employee.getLanguages()}">
+                    <li th:text="${lang}"></li>
+                </div>
+            </ul>
+        </td>
+<!--        <td><div th:text="${employee.getLanguages()}"></div></td>-->
+    </tr>
+</table>
+</h3>
+<form th:action="@{/}" th:object="${employee}">
+        <input type="hidden" th:field="*{name}">
+        <input type="hidden" th:field="*{surname}">
+        <input type="hidden" th:field="*{salary}">
+    <input type="submit" value="Home">
+</form>
+</body>
+</html>
