@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New employee</title>
+</head>
+<body>
+<h2>Employee information</h2>
+<br>
+<form th:action="@{saveEmployee}" th:method="post" th:object="${employee}">
+    <input type="hidden" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="*{name}"></input></td>
+        </tr>
+        <tr>
+            <td>Surname</td>
+            <td><input type="text" th:field="*{surname}"></input></td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td><input type="text" th:field="*{salary}"></input></td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td>
+<!--                <select th:field="*{department}">-->
+<!--                    <th:block th:each="dep : ${departments}">-->
+<!--                        <option th:text="${dep.name}" th:value="${dep.id}"></option>-->
+<!--                    </th:block>-->
+<!--                </select>-->
+                <select th:field="*{department.id}">
+                    <option th:each="dep : ${departments}" th:value="${dep.id}" th:text="${dep.name}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <input type="submit" value="OK">
+</form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All employees</title>
+</head>
+<body>
+<h2>All employees</h2>
+<br>
+</div>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Salary</th>
+        <th>Department</th>
+        <th>Operations</th>
+    </tr>
+    <div th:each="employee : ${employees}">
+        <tr>
+<!--            <td><a th:href="@{/employees/{id}(id=${employee.getId()})}" th:text="${employee.getId()}"></a></td>-->
+            <td><a th:href="@{updateEmployee(id=${employee.id})}" th:text="${employee.name}"></td>
+            <td><div th:text="${employee.surname}"></td>
+            <td><div th:text="${employee.salary}"></td>
+            <td><div th:text="${employee?.department?.name}"</td>
+<!--            ? - для возможных null-значений-->
+            <td>
+                <form th:action="@{deleteEmployee(id=${employee.id})}" th:method="post">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+    </div>
+</table>
+<br>
+<input type="button" value="Add" onclick="window.location.href='addEmployee'">
+</body>
+</html>
