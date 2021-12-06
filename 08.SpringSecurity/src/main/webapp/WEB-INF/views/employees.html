@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<body>
+<h3>All employees</h3>
+<br>
+
+<div sec:authorize="true">
+    authorize - always
+</div>
+
+<div sec:authorize="false">
+    authorize - never
+</div>
+
+<div class="container" sec:authorize="isAnonymous()">
+    authorize - anonymous
+</div>
+
+<div class="container" sec:authorize="!isAnonymous()">
+    authorize - not anonymous
+</div>
+
+<div class="container" sec:authorize="isAuthenticated()">
+    authorize - authenticated
+</div>
+
+<div class="container" sec:authorize="!isAuthenticated()">
+    authorize - not authenticated
+</div>
+
+<div sec:authentication="name"></div>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    This content is only shown to admin.
+</div>
+<div sec:authorize="hasRole('ROLE_MANAGER')">
+    This content is only shown to manager.
+</div>
+<div sec:authorize="hasRole('HR')">
+<form th:action="@{getHrInfo}" method="get">
+    HR information only
+    <br>
+    <input type="submit" value="Salary">
+</form>
+</div>
+<br>
+<div sec:authorize="hasRole('MANAGER')">
+<form th:action="@{getManagerInfo}" method="get">
+    Manager information only
+    <br>
+    <input type="submit" value="Performance">
+</form>
+</div>
+</body>
+</html>
